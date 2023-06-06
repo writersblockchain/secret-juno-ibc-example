@@ -1,39 +1,48 @@
-config.toml is for gaiad manager - between secret testnet and juno testnet
+### hermes relayer - between secret testnet and juno testnet
 
-I receive a successful output with:
+1. start gm
+
+```gm start
+
+```
+
+2. check status
+
+```gm status
+
+```
+
+3. create clients
 
 ```
 hermes create client --host-chain pulsar-2 --reference-chain uni-6
 ```
 
-It returns:
-
-```
-SUCCESS CreateClient(
-    CreateClient(
-        Attributes {
-            client_id: ClientId(
-                "07-tendermint-225",
-            ),
-            client_type: Tendermint,
-            consensus_height: Height {
-                revision: 6,
-                height: 1593348,
-            },
-        },
-    ),
-)
-```
-
-But I run into error when I run:
-
 ```
 hermes create client --host-chain uni-6 --reference-chain pulsar-2
 ```
 
-The error is:
+4. create connections
 
 ```
-foreign client error: error raised while creating client for chain pulsar-2: failed when building client state: ICS 07 error: invalid trusting period: ClientState trusting period (1036800s) must be smaller than unbonding period (86400s)
+hermes create connection --a-chain pulsar-2 --a-client 07-tendermint-229 --b-client 07-tendermint-402
 
 ```
+
+5. create channel identifier
+
+```
+hermes create channel --a-chain pulsar-2 --a-connection connection-215 --a-port transfer --b-port transfer
+```
+
+6. execute the contract
+
+```
+secretcli tx compute execute --from a "$CONTRACT_ADDRESS" '{"do_something": {}}' --gas-prices 0.25uscrt --output json
+```
+
+junod tx wasm execute --from seanradJuno juno1ejh2e6w9at5u9tsesx2054ryljqa32dlajclhzd88cy5yxgj8z4svlvq7h '{"do_something": {}}' --gas 200000 -y --chain-id uni-6 --node https://uni-rpc.reece.sh:443 --gas-prices 0.025ujunox
+
+junod tx wasm execute --from seanradJuno juno1ejh2e6w9at5u9tsesx2054ryljqa32dlajclhzd88cy5yxgj8z4svlvq7h '{"random_response": {}}' --gas 200000 -y --chain-id uni-6 --node https://uni-rpc.reece.sh:443 --gas-prices 0.025ujunox
+
+junod query tx FBC4C404DFD67209C36B533BD180BDDBCF32E14B47AB675896CD2B7F9F8F4B18 --chain-id uni-6 --node https://uni-rpc.reece.sh:443
