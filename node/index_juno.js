@@ -45,7 +45,7 @@ async function upload() {
   console.log(res);
 }
 
-upload();
+// upload();
 
 let instantiate = async () => {
   let wallet = await Secp256k1HdWallet.fromMnemonic(mnemonic, {
@@ -74,19 +74,24 @@ let instantiate = async () => {
 
 // instantiate();
 
-// hermes create client --host-chain pulsar-2 --reference-chain uni-6
+// junod tx wasm instantiate 2460 '{"init": {"rand_provider": { "address": "secret1yuzex9mx09lj52uzjzszgqtwddce2kgmgu4y9l", "code_hash":   "4350e9119e47e4f5a2bcfc84f12ec062fe927a44253c0bc9cea08fc5a0b4fe90"}}}' --label 'ibc-consumer-template' --no-admin --from seanradJuno --gas 200000 -y --chain-id uni-6 --node https://uni-rpc.reece.sh:443  --gas-prices 0.025ujunox
 
-// hermes keys add --chain uni-6 --mnemonic-file seanrad.json
+// junod tx wasm instantiate 2461 '{}' --label 'ibc-consumer-template consumer proxy' --no-admin --from seanradJuno --gas 300000 -y --chain-id uni-6 --node https://uni-rpc.reece.sh:443  --gas-prices 0.025ujunox
 
-// hermes create client --host-chain uni-6 --reference-chain pulsar-2
+// junod q tx 8D7158A34666FD6D08A897C1189E9C0660399DA6738E87FD0ACF66D2AAEA3B92 --node https://uni-rpc.reece.sh:443
 
-// junod q tx 22A77D733AC41858F5D40A5CA3AACFF570DF8351A067B94A72699BEF982E449F --node https://rpc.uni.juno.deuslabs.fi:443
-
-// junod tx wasm instantiate 2363 '{"init": {"rand_provider": { "address": "secret16pfmjjxe25sl2t2k90hcmmnk76vcxertrdu0ss", "code_hash":   "4350e9119e47e4f5a2bcfc84f12ec062fe927a44253c0bc9cea08fc5a0b4fe90"}}}' --label 'ibc-consumer-template' --no-admin --from seanradJuno --gas 200000 -y --chain-id uni-6 --node https://uni-rpc.reece.sh:443  --gas-prices 0.025ujunox
-
-// junod q tx CBC465D5DF9E583275CEB5205CDE7D9D36346C7F67689EF6090C67827BA0DEAF --node https://uni-rpc.reece.sh:443
+// let juno_contract_address = "juno1xxdwdvc7l5f9z27x3kdteq0e598hz90f7zjyexc9dmz43f5agrzq4884uj"
 
 // junod tx wasm execute --from seanradJuno juno1cfze9csy5p52ngywlt7x7qfmmcn3zcfv5td3kjm0a0r8qm0fhecs30sfhn '{"do_something": {}}' --gas 200000 -y --chain-id uni-6 --node https://uni-rpc.reece.sh:443 --gas-prices 0.025ujunox
 
+// <!-- junod tx wasm execute --from seanradJuno juno1ejh2e6w9at5u9tsesx2054ryljqa32dlajclhzd88cy5yxgj8z4svlvq7h '{"do_something": {}}' --gas 200000 -y --chain-id uni-6 --node https://uni-rpc.reece.sh:443 --gas-prices 0.025ujunox
 
-junod q tx CBC465D5DF9E583275CEB5205CDE7D9D36346C7F67689EF6090C67827BA0DEAF --node https://uni-rpc.reece.sh:443
+// junod tx wasm execute --from seanradJuno juno1ejh2e6w9at5u9tsesx2054ryljqa32dlajclhzd88cy5yxgj8z4svlvq7h '{"random_response": {}}' --gas 200000 -y --chain-id uni-6 --node https://uni-rpc.reece.sh:443 --gas-prices 0.025ujunox
+
+let consumer_juno_address =
+  juno1ca8xkz8mm8gme4wgjrdwmklwuwe7mf8jq94p8qycumlcxd4geu5ssaeqnd;
+
+  junod tx wasm execute --from seanradJuno juno1ca8xkz8mm8gme4wgjrdwmklwuwe7mf8jq94p8qycumlcxd4geu5ssaeqnd '{"do_something": {}}' --gas 200000 -y --chain-id uni-6 --node https://uni-rpc.reece.sh:443 --gas-prices 0.025ujunox
+
+
+  // junod q tx 9160CB8205FF438E0A9E004294EBE252B6C4E1D2482FC4F3E7DD31BBC6D40BB5 --node https://uni-rpc.reece.sh:443

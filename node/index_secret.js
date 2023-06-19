@@ -5,13 +5,11 @@ const wallet = new Wallet(
   "shed clerk spray velvet flower tide cherry idea public solar prize tackle"
 );
 
-const contract_wasm = fs.readFileSync(
-  "../target/wasm32-unknown-unknown/release/secret_ibc_rng_template.wasm"
-);
-const codeId = 21493;
+const contract_wasm = fs.readFileSync("../proxy/secret_ibc_rng_template.wasm");
+const codeId = 21880;
 const contractCodeHash =
   "4350e9119e47e4f5a2bcfc84f12ec062fe927a44253c0bc9cea08fc5a0b4fe90";
-const contractAddress = "secret16pfmjjxe25sl2t2k90hcmmnk76vcxertrdu0ss";
+const contractAddress = "secret1yuzex9mx09lj52uzjzszgqtwddce2kgmgu4y9l";
 
 const secretjs = new SecretNetworkClient({
   chainId: "pulsar-2",
