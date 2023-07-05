@@ -1,15 +1,18 @@
 import { SecretNetworkClient, Wallet } from "secretjs";
 import * as fs from "fs";
 
-const wallet = new Wallet(
-  "shed clerk spray velvet flower tide cherry idea public solar prize tackle"
-);
+import dotenv from "dotenv";
+dotenv.config();
 
-const contract_wasm = fs.readFileSync("../proxy/secret_ibc_rng_template.wasm");
-const codeId = 21880;
-const contractCodeHash =
-  "4350e9119e47e4f5a2bcfc84f12ec062fe927a44253c0bc9cea08fc5a0b4fe90";
-const contractAddress = "secret1yuzex9mx09lj52uzjzszgqtwddce2kgmgu4y9l";
+const wallet = new Wallet(process.env.MNEMONIC);
+
+const contract_wasm = fs.readFileSync(
+  "../proxy/target/wasm32-unknown-unknown/release/secret_ibc_rng_template.wasm"
+);
+// const codeId = 22042;
+// const contractCodeHash =
+//   "4350e9119e47e4f5a2bcfc84f12ec062fe927a44253c0bc9cea08fc5a0b4fe90";
+// const contractAddress = "secret1fn7v9r60u9rqgwwxmwn8hhe80ka055pultkd92";
 
 const secretjs = new SecretNetworkClient({
   chainId: "pulsar-2",
@@ -48,15 +51,6 @@ let upload_contract = async () => {
   console.log(tx.arrayLog);
 };
 
-let test = async () => {
-  const contractCodeHash = (
-    await secretjs.query.compute.codeHashByCodeId({ code_id: 21493 })
-  ).code_hash;
-  console.log(`Contract hash: ${contractCodeHash}`);
-};
-
-// test();
-
 // upload_contract();
 
 let instantiate_contract = async () => {
@@ -83,10 +77,4 @@ let instantiate_contract = async () => {
   console.log(contractAddress);
 };
 
-instantiate_contract();
-
-// secretcli tx compute store ./contract.wasm.gz --from secret1j7n3xx4sfgjea4unghd78qvnvxdz49cxmrkqlj --gas auto --gas-prices 0.525uscrt --gas-adjustment 1.5
-
-// 6178256F20595A630418B6AFD3A627A3A23FCD6329C0182372C7ACC6E3C47539
-
-// secretcli tx compute instantiate 21491 'init' --from secret1j7n3xx4sfgjea4unghd78qvnvxdz49cxmrkqlj --label secret-ibc-rng-template -y
+// instantiate_contract();
